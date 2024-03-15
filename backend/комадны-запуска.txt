@@ -1,0 +1,5 @@
+docker build -t fastapi_app .
+docker run -d --name fastapi_container -p 8000:8000 fastapi_app
+
+#для всех тестов
+python -m unittest discover -s tests
