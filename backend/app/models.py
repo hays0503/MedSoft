@@ -9,6 +9,7 @@ class User(Base):
 
     Attributes:
         id (int): The unique identifier for the user.
+        phone(str): The phone number of the user (format: +71234567890).
         username (str): The username of the user.
         email (str): The email address of the user.
         hashed_password (str): The hashed password of the user.
@@ -18,9 +19,11 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
+    phone = Column(String, unique=True, index=True)
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+    password_reset_token = Column(String, default="")
     is_active = Column(Boolean, default=True)
 
     # Если у вас есть отношения с другими таблицами, вы можете использовать relationship для их определения

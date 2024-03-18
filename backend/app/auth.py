@@ -36,6 +36,15 @@ def authenticate_user(db: Session, username: str, password: str):
         return False
     return user
 
+def authenticate_user_phone(db: Session, phone: schemas.Phone, password: str):
+    """Аутентификация пользователя."""
+    user = db.query(models.User).filter(models.User.phone == phone).first()
+    if not user:
+        return False
+    if not verify_password(password, user.hashed_password):
+        return False
+    return user
+
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     """Создание JWT токена."""
     to_encode = data.copy()
