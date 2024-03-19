@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  createBrowserRouter,
+  Link,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Home from "@pages/Home/Home";
+import Auth from "@pages/Auth/Auth";
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button  data-testid="Increase" onClick={() => setCount((count) => count + 1)}>
-          count is <div data-testid="Count">{count}</div>
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+// 3️⃣ Router singleton created
+const router = createBrowserRouter([
+  { path: "/", Component: Home },
+  { path: "*", Component: Root },
+]);
+
+// 4️⃣ RouterProvider added
+export default function App() {
+  return <RouterProvider router={router} />;
 }
 
-export default App
+// 1️⃣ Changed from App to Root
+function Root() {
+  // 2️⃣ `BrowserRouter` component removed, but the <Routes>/<Route>
+  // component below are unchanged
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/auth" element={<Auth/>} />
+    </Routes>
+  );
+}

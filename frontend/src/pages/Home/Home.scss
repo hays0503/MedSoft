@@ -1,0 +1,25 @@
+
+$background-color: #2b1e3d;
+$background-color-dark: #16131a;
+$font-color: rgb(244, 224, 241);
+$font-color-dark: rgb(189, 147, 183);
+
+.Home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: $font-color;
+    background-color:$background-color;
+    
+    *{
+        color: $font-color;
+        background-color:$background-color;
+    }
+
+    li{
+        color: $font-color-dark;
+        background-color: $background-color-dark;
+    }
+}
