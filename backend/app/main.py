@@ -2,11 +2,12 @@ from datetime import timedelta
 from fastapi import FastAPI, Depends, HTTPException, Request, status
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 
 from . import models
 from .database import get_db, engine
 from .auth import create_access_token, get_current_user, get_password_hash, authenticate_user,ACCESS_TOKEN_EXPIRE_MINUTES  # Убедитесь, что эти функции импортированы из auth.py
-from .schemas import PasswordRecoveryRequest, Message
+from .schemas import PasswordRecoveryRequest, Message ,UserLogin
 from .schemas import UserCreate,UserLoginPhone, Token, User as SchemaUser  # Изменено для ясности и избежания конфликтов имен
 from .recovery_password import generate_password_reset_token,send_password_reset_confirmation_email, send_password_reset_email
 from .generate_password import generate_ascii_password
@@ -15,6 +16,20 @@ from .generate_password import generate_ascii_password
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/users/registration", response_model=SchemaUser)
@@ -44,17 +59,18 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 
 @app.post("/users/authenticate/user-password", response_model=Token)
-def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+def login_for_access_token(form_data: UserLogin, db: Session = Depends(get_db)):
     """
     Endpoint to authenticate a user and generate an access token.
 
     Args:
-        form_data (OAuth2PasswordRequestForm): The form data containing the username and password.
+        form_data (UserLogin): The form data containing the username and password.
         db (Session): The database session.
 
     Returns:
         dict: A dictionary containing the access token and token type.
     """
+    
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(

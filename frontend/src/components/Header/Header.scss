@@ -1,36 +1,35 @@
 .Header {
-    all: unset;
-    box-sizing: border-box;
-    cursor: pointer;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    width: 100%;
-    height: 4rem;
-    background: #1f2028;
-    color: rgb(221, 214, 254);
-    border: none;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    flex-wrap: nowrap;
-    flex-direction: column;
-
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  background: #1f2028;
+  color: rgb(221, 214, 254);
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  flex-wrap: nowrap;
+  flex-direction: column;
 
   ::after {
     content: "";
@@ -44,8 +43,8 @@
     filter: blur(5px);
     z-index: -1;
     background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    background-size: cover;
+    -webkit-background-size: 1000% 1000%;
+    background-size: 1000% 1000%;
     -webkit-background-position: center;
     background-position: center;
     background-image: radial-gradient(
@@ -57,6 +56,44 @@
       rgba(119, 69, 122, 1) 71%,
       rgba(32, 33, 40, 1) 100%
     );
+
+    @-webkit-keyframes backgroundChange {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @-moz-keyframes backgroundChange {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @keyframes backgroundChange {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    -webkit-animation: backgroundChange 10s ease infinite;
+    -moz-animation: backgroundChange 10s ease infinite;
+    animation: backgroundChange 10s ease infinite;
   }
 
   .persone {
@@ -71,25 +108,42 @@
     vertical-align: -0.4em;
     margin-left: 5px;
     margin-right: 5px;
+    filter: invert(100%);
+    &:hover {
+      filter: invert(0%);
+    }
+    
   }
-
 }
 
-.Popup{
-    position: relative;
+.Popup {
+  position: relative;
 
-    #content{
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: fit-content;
-        background-color: #1f2028;
-        border-radius: 5%;
-        padding: 20px;
-        color: white;
-        z-index: 1000;
-        margin-right: 15px;
+  #content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    background-color: #1f2028;
+    border-radius: 5%;
+    padding: 20px;
+    color: white;
+    z-index: 1000;
+    margin-right: 15px;
+
+    @keyframes ShowAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0px);
+      }
     }
+
+    animation: ShowAnimation 0.5s ease-in-out;
+  }
 }
 
 // .hideOnMobile {

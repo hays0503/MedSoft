@@ -1,6 +1,7 @@
 from typing import Optional
 from typing_extensions import Annotated
-from pydantic import BaseModel, StringConstraints, ValidationError, validator
+from fastapi import Form
+from pydantic import BaseModel, Field, StringConstraints, ValidationError, validator 
 
 class Message(BaseModel):
     message: str
@@ -42,8 +43,14 @@ class User(BaseModel):
 
 # Схема для аутентификации пользователя
 class UserLogin(BaseModel):
-    username: str
-    password: str
+    username: str = Field(..., alias="username")
+    password: str = Field(..., alias="password")
+
+    # @validator('username', 'password')
+    # def parse_form_data(cls, v):
+    #     return v[0] if isinstance(v, list) else v
+
+
 
 # Схема для аутентификации пользователя по телефону
 class UserLoginPhone(BaseModel):
