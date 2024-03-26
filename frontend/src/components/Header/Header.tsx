@@ -10,29 +10,32 @@ const Header: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>("");
 
-  const action = (_userName:string) => {
-    console.log(userName)
-    console.log("action", _userName)
+  const action = (_userName: string) => {
+    console.log(userName);
+    console.log("action", _userName);
     setUserName(_userName);
-  }
+  };
 
   const User = () => {
-
-    const localStorageUser = JSON.parse(localStorage.getItem("currentUser") as string);
-    console.log(Boolean(userName || localStorageUser?.username))
+    const localStorageUser = JSON.parse(
+      localStorage.getItem("currentUser") as string
+    );
+    console.log(Boolean(userName || localStorageUser?.username));
     const UserName = userName || localStorageUser?.username;
 
-    return <div
-      onClick={() => setIsVisible(!isVisible)}
-      className="persone position-relative"
-    >
-      {UserName ? UserName : "Войти"}
-      <img src={person} />
-      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        99+
-        <span className="visually-hidden">unread messages</span>
-      </span>
-    </div>
+    return (
+      <div
+        onClick={() => setIsVisible(!isVisible)}
+        className="persone position-relative"
+      >
+        {UserName ? UserName : "Войти"}
+        <img src={person} />
+        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          99+
+          <span className="visually-hidden">unread messages</span>
+        </span>
+      </div>
+    );
   };
 
   return (
@@ -49,15 +52,14 @@ const Header: React.FC = () => {
           </Link>
 
           <div className="p-2 ms-auto text-decoration-none hideOnMobile">
-              <User />            
+            <User />
           </div>
-          
         </nav>
       </header>
       {isVisible && (
         <div className="Popup">
           <div id="content">
-            <Authorization setUserName={action}/>
+            <Authorization setUserName={action} />
           </div>
         </div>
       )}

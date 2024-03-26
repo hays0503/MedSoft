@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.scss";
 import Header from "@components/Header/Header";
 import About from "@components/About/About";
+import SelectorBody from "@components/SelectorBody/SelectorBody";
 
 const Home: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const Home: React.FC = () => {
 
           <main role="main" className="container mt-5">
             <section id="about">
+              <SelectorBody />
               <h2>О Компании МедСофт</h2>
               <p>
                 МедСофт — это ведущая компания, специализирующаяся на разработке

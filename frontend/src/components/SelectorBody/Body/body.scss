@@ -1,0 +1,54 @@
+
+.show{
+  display: block !important;
+}
+
+.model-svg {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 80vh;
+  // width: 100%;
+  width: 285px;
+  background-color: brown;
+
+  .pop-up-element{
+    display: none;
+    position: absolute;
+    z-index: 2;
+    border-radius: 5%;
+    background-color: whitesmoke;
+    color: #000;
+    font: 400 1.5rem 'Roboto', sans-serif;
+  }
+
+  svg {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    opacity: 0.45;
+
+    height: 100%;
+    // width: fit-content;
+    z-index: 3;
+  }
+
+  img {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    // opacity: 0.45;
+
+    height: 100%;
+    // width: fit-content;
+    z-index: 1;
+  }
+}
